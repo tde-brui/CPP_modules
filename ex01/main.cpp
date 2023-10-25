@@ -10,6 +10,7 @@ int main()
     cout << "OPTIONS:" << endl << "ADD" << endl << "SEARCH" << endl << "EXIT" << endl;
     while (1)
     {
+        cout << "Please enter an option: ";
         cin >> input;
         if (input == "ADD")
             Phonebook.Add_Contact();
