@@ -1,6 +1,6 @@
 NAME = phonebook
 CC = c++
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
 SRC = phonebook.cpp main.cpp Contact.cpp
 OBJ = $(SRC:.cpp=.o)
 

@@ -8,7 +8,9 @@ class Contact{
         void    set_phone_number();
         void    set_darkest_secret();
         void    print_contacts(Contact contact[]);
-    
+        void    print_contact_info(string str);
+        void    print_single_contact(Contact contact, int index);
+
     private:
         string first_name;
         string last_name;

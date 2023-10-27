@@ -11,7 +11,7 @@ int main()
     while (1)
     {
         cout << "Please enter an option: ";
-        cin >> input;
+        getline(cin, input);
         if (input == "ADD")
             Phonebook.Add_Contact();
         else if (input == "SEARCH")

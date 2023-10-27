@@ -4,7 +4,7 @@ using namespace std;
 
 Phonebook::Phonebook()
 {
-    index = 0;
+    this->index = 0;
 }
 
 Phonebook::~Phonebook()
@@ -13,13 +13,18 @@ Phonebook::~Phonebook()
 
 void Phonebook::Search_Contact()
 {
+    string temp;
+    int    input_index;
+
     contact[index].print_contacts(contact);
     cout << "Which index would you like to see? ";
-    cin >> index;
-    if (index < 0 || index > 7)
+    getline(cin, temp);
+    cout << atoi("d") << endl;
+    input_index = atoi(temp.c_str());
+    if (input_index < 0 || input_index > 7)
         cout << "Error: invalid index" << endl << "Returning to options" << endl;
     else
-        cout << "LOL";
+        contact[input_index].print_single_contact(contact[input_index], input_index);
 }
 
 void Phonebook::Add_Contact()
@@ -35,7 +40,7 @@ void Phonebook::Add_Contact()
     cout << "Darkest secret: ";
     contact[index].set_darkest_secret();
     if (index < 7)
-        index++;
+        this->index++;
     else
-        index = 0;
+        this->index = 0;
 }
