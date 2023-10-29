@@ -6,11 +6,11 @@ int main()
 {
     Phonebook Phonebook;
     std::string  input;
-    std::cout << "OPTIONS:" << endl << "ADD" << endl << "SEARCH" << endl << "EXIT" << endl;
+    std::cout << "OPTIONS:" << std::endl << "ADD" << std::endl << "SEARCH" << std::endl << "EXIT" << std::endl;
     while (1)
     {
         std::cout << "Please enter an option: ";
-        getline(cin, input);
+        std::getline(std::cin, input);
         if (input == "ADD")
             Phonebook.Add_Contact();
         else if (input == "SEARCH")
@@ -18,6 +18,6 @@ int main()
         else if (input == "EXIT")
             break ;
         else
-            std::cout << "Please enter a valid option" << endl;
+            std::cout << "Please enter a valid option" << std::endl;
     }
 }

@@ -1,4 +1,4 @@
-using namespace std;
+#include <iostream>
 
 class Contact{
     public:
@@ -8,15 +8,15 @@ class Contact{
         void    set_phone_number();
         void    set_darkest_secret();
         void    print_contacts(Contact contact[]);
-        void    print_contact_info(string str);
+        void    print_contact_info(std::string str);
         void    print_single_contact(Contact contact, int index);
 
     private:
-        string first_name;
-        string last_name;
-        string nickname;
-        string phone_number;
-        string darkest_secret;
+        std::string first_name;
+        std::string last_name;
+        std::string nickname;
+        std::string phone_number;
+        std::string darkest_secret;
 };
 
 class Phonebook

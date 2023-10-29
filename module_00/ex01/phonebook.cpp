@@ -25,7 +25,7 @@ void Phonebook::Search_Contact()
     if (s >> input_index && input_index >= 0 && input_index <= 7)
         contact[input_index].print_single_contact(contact[input_index], input_index);
     else
-        std::cout << "Error: Invalid index" << endl << "Returning to options" << endl;
+        std::cout << "Error: Invalid index" << std::endl << "Returning to options" << std::endl;
 }
 
 void Phonebook::Add_Contact()
