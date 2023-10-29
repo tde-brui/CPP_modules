@@ -1,5 +1,6 @@
-using namespace std;
 #include <iostream>
+#include <string>
+#include <sstream>
 #include "phonebook.hpp"
 
 Phonebook::Phonebook()
@@ -13,31 +14,31 @@ Phonebook::~Phonebook()
 
 void Phonebook::Search_Contact()
 {
-    string temp;
-    int    input_index;
+    int input_index;
+    std::string index_string;
+    std::istringstream s;
 
     contact[index].print_contacts(contact);
-    cout << "Which index would you like to see? ";
-    getline(cin, temp);
-    cout << atoi("d") << endl;
-    input_index = atoi(temp.c_str());
-    if (input_index < 0 || input_index > 7)
-        cout << "Error: invalid index" << endl << "Returning to options" << endl;
-    else
+    std::cout << "Which index would you like to see? ";
+    getline(std::cin, index_string);
+    s.str(index_string);
+    if (s >> input_index && input_index >= 0 && input_index <= 7)
         contact[input_index].print_single_contact(contact[input_index], input_index);
+    else
+        std::cout << "Error: Invalid index" << endl << "Returning to options" << endl;
 }
 
 void Phonebook::Add_Contact()
 {
-    cout << "First name: ";
+    std::cout << "First name: ";
     contact[index].set_first_name();
-    cout << "Last name: ";
+    std::cout << "Last name: ";
     contact[index].set_last_name();
-    cout << "Nickname: ";
+    std::cout << "Nickname: ";
     contact[index].set_nickname();
-    cout << "Phone number: ";
+    std::cout << "Phone number: ";
     contact[index].set_phone_number();
-    cout << "Darkest secret: ";
+    std::cout << "Darkest secret: ";
     contact[index].set_darkest_secret();
     if (index < 7)
         this->index++;

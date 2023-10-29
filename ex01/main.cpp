@@ -1,4 +1,3 @@
-using namespace std;
 #include <iostream>
 #include <string.h>
 #include "phonebook.hpp"
@@ -6,11 +5,11 @@ using namespace std;
 int main()
 {
     Phonebook Phonebook;
-    string  input;
-    cout << "OPTIONS:" << endl << "ADD" << endl << "SEARCH" << endl << "EXIT" << endl;
+    std::string  input;
+    std::cout << "OPTIONS:" << endl << "ADD" << endl << "SEARCH" << endl << "EXIT" << endl;
     while (1)
     {
-        cout << "Please enter an option: ";
+        std::cout << "Please enter an option: ";
         getline(cin, input);
         if (input == "ADD")
             Phonebook.Add_Contact();
@@ -19,6 +18,6 @@ int main()
         else if (input == "EXIT")
             break ;
         else
-            cout << "Please enter a valid option" << endl;
+            std::cout << "Please enter a valid option" << endl;
     }
 }
