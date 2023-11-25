@@ -9,10 +9,10 @@ int main()
 
     a = Fixed(1234.4321f);
 
-    cout << "a is " << endl;
-    cout << "b is " << endl;
-    cout << "c is " << endl;
-    cout << "d is " << endl;
+    cout << "a is " << a << endl;
+    cout << "b is " << b << endl;
+    cout << "c is " << c << endl;
+    cout << "d is " << d << endl;
 
     cout << "a is " << a.toInt() << " as integer" << endl;
     cout << "b is " << b.toInt() << " as integer" << endl;

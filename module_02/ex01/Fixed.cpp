@@ -18,7 +18,9 @@ Fixed::Fixed(const Fixed &fixed)
 //Copy assignment operator
 Fixed &Fixed::operator=(const Fixed &fixed)
 {
-    cout << "Copy assignment operator called" << endl;
+    cout << "Copy assignmen operator called" << endl;
+    if (this != &fixed)
+        this->value = fixed.getRawBits();
     return (*this);
 }
 
@@ -45,15 +47,26 @@ int Fixed::toInt(void) const
     return (this->value >> this->fractional_bits);
 }
 
+// 1 << 8 = 256 dividing by 256 is the same as shifting right by 8
+float Fixed::toFloat(void) const
+{
+    return ((float)this->value / (float)(1 << this->fractional_bits));
+}
 
 int Fixed::getRawBits(void) const
 {
-    cout << "getRawBits member function called" << endl;
+    //cout << "getRawBits member function called" << endl;
     return (this->value);
 }
 
 void Fixed::setRawBits(int const raw)
 {
     this->value = raw;
-    cout << this->value;
+    //cout << this->value;
+}
+
+std::ostream &operator<<(std::ostream &out, const Fixed &fixed)
+{
+    out << fixed.toFloat();
+    return (out);
 }
