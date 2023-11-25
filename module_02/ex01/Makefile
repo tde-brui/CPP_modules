@@ -1,6 +1,6 @@
 NAME = Fixed
 CC = c++
-CFLAGS = -Wall -Wextra -Werror -std=c++98 -g -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -std=c++98 
 OBJECT = $(SOURCES:.cpp=.o)
 SOURCES = main.cpp Fixed.cpp
 
