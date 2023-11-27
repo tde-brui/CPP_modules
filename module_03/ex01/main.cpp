@@ -6,5 +6,5 @@ int main()
     ScavTrap opp2("opp2");
 
     opp1.attack("opp2");
-    
+    opp2.attack("opp1");
 }
