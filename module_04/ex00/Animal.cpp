@@ -1,14 +1,26 @@
 #include "Animal.hpp"
 
-std::string Animal::getType()
+Animal::Animal()
+{
+    cout << "An animal has been created!" << endl;
+}
+
+Animal::~Animal()
+{
+    cout << "An animal has been destroyed" << endl;
+}
+
+std::string Animal::getType() const
 {
     return (this->type);
 }
 
-void Animal::makeSound()
+void Animal::makeSound() const
 {
-    if (this->type == "Cat")
-        std::cout << "Meowww" << std::endl;
-    if (this->type == "Dog")
-        std:: cout << "Woofff" << std::endl;
+    if (type == "Dog")
+        cout << "Woof!" << endl;
+    else if (type == "Cat")
+        cout << "Meow!" << endl;
+    else
+        cout << "Animal sound!" << endl;
 }

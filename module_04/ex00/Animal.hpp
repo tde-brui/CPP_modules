@@ -1,4 +1,9 @@
-#include <iostream>
+#ifndef ANIMAL_H
+# define ANIMAL_H
+# include <iostream>
+
+using std::cout;
+using std::endl;
 
 class Animal
 {
@@ -7,11 +12,13 @@ class Animal
 
     public:
         Animal();
-        ~Animal();
+        ~Animal() ;
         Animal(const Animal &animal);
         Animal &operator=(const Animal &animal);
         
-        std::string getType();
-        void makeSound();
+        std::string getType() const;
+        void makeSound() const;
 
 };
+
+#endif
