@@ -10,3 +10,8 @@ Dog::~Dog()
 {
     cout << "A dog has been destroyed" << endl;
 }
+
+void Dog::makeSound() const
+{
+    cout << "Woof" << endl;
+}

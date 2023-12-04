@@ -10,3 +10,8 @@ Cat::~Cat()
 {
     cout << "A cat has been destroyed" << endl;
 }
+
+void Cat::makeSound() const
+{
+    cout << "Meow" << endl;
+}

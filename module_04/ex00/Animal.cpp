@@ -17,10 +17,5 @@ std::string Animal::getType() const
 
 void Animal::makeSound() const
 {
-    if (type == "Dog")
-        cout << "Woof!" << endl;
-    else if (type == "Cat")
-        cout << "Meow!" << endl;
-    else
-        cout << "Animal sound!" << endl;
+    cout << "Animal sound!" << endl;
 }
