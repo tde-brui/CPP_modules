@@ -1,6 +1,6 @@
-#include "Animal.hpp"
-#include "Dog.hpp"
-#include "Cat.hpp"
+#include "../inc/Animal.hpp"
+#include "../inc/Dog.hpp"
+#include "../inc/Cat.hpp"
 
 int main()
 {

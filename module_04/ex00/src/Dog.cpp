@@ -1,4 +1,4 @@
-#include "Dog.hpp"
+#include "../inc/Dog.hpp"
 
 Dog::Dog()
 {
@@ -14,4 +14,9 @@ Dog::~Dog()
 void Dog::makeSound() const
 {
     cout << "Woof" << endl;
+}
+
+std::string Dog::getType() const
+{
+    return (this->type);
 }

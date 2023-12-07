@@ -1,4 +1,4 @@
-NAME = Animal
+NAME = AbstractAnimal
 CC = c++
 CFLAGS = -Wall -Wextra -Werror -std=c++98
 BUILD_DIR = build
@@ -22,6 +22,6 @@ clean:
 	rm -rf $(BUILD_DIR)
 
 fclean: clean
-	rm -f $(NAME)
+	rm -rf $(NAME)
 
 re: fclean all
