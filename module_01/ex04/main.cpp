@@ -38,10 +38,6 @@ void replaceLine(std::string &filename, std::string s1, std::string s2)
     }
     infile.close();
     outfile.close();
-    if (remove(filename.c_str()) != 0)
-        cout << "Error deleting file" << endl;
-    if (rename((filename + ".replace").c_str(), filename.c_str()) != 0)
-        cout << "Error renaming file" << endl;
 }
 
 int main(int argc, char **argv)

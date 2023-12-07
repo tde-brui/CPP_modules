@@ -11,7 +11,7 @@
 
     ClapTrap::ClapTrap(const std::string &name)
     {
-        cout << "A ClapTrap " << name << " has been created!"<< endl;
+        cout << "ClapTrap " << name << " has been created!"<< endl;
         this->name = name;
         this->attack_damage = 0;
         this->energy_points = 10;
@@ -38,12 +38,12 @@
 
     void ClapTrap::attack(const std::string &target)
     {
-        if (this->energy_points == 0)
+        if (this->energy_points <= 0)
         {
             cout << "ClapTrap " << this->name << " has no energy points left!" << endl;
             return ;
         }
-        else if (this->hitpoints == 0)
+        else if (this->hitpoints <= 0)
         {
             cout << "ClapTrap " << this->name << " has no hitpoints and can not attack!" << endl;
             return ;

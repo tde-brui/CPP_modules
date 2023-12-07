@@ -1,4 +1,4 @@
-#include "ClapTrap.hpp"
+#include "../inc/ClapTrap.hpp"
 
     ClapTrap::ClapTrap()
     {

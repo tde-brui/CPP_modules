@@ -1,21 +1,27 @@
 NAME = FragTrap
 CC = c++
 CFLAGS = -Wall -Wextra -Werror -std=c++98
-OBJECT = $(SOURCES:.cpp=.o)
-SOURCES = main.cpp ClapTrap.cpp ScavTrap.cpp FragTrap.cpp
+BUILD_DIR = build
+SRC_DIR = src
+INC_DIR = inc
+SOURCES = $(wildcard $(SRC_DIR)/*.cpp)
+OBJECTS = $(patsubst $(SRC_DIR)/%.cpp,$(BUILD_DIR)/%.o,$(SOURCES))
 
-all: $(NAME)
+all: $(BUILD_DIR) $(NAME)
 
-$(NAME): $(OBJECT)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJECT)
+$(BUILD_DIR):
+	mkdir -p $(BUILD_DIR)
 
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+$(NAME): $(OBJECTS)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJECTS)
 
-clean: 
-	rm -rf $(OBJECT)
+$(BUILD_DIR)/%.o: $(SRC_DIR)/%.cpp
+	$(CC) $(CFLAGS) -I$(INC_DIR) -c $< -o $@
+
+clean:
+	rm -rf $(BUILD_DIR)
 
 fclean: clean
-	rm -rf $(NAME)
+	rm -f $(NAME)
 
 re: fclean all

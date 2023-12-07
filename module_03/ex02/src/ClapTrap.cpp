@@ -1,4 +1,4 @@
-#include "ClapTrap.hpp"
+#include "../inc/ClapTrap.hpp"
 
     ClapTrap::ClapTrap()
     {
@@ -93,4 +93,9 @@
     void ClapTrap::get_Stats(void)
     {
         cout << "ClapTrap " << this->name << " has " << this->hitpoints << " hitpoints, " << this->energy_points << " energy points and " << this->attack_damage << " attack damage!" << endl;
+    }
+
+    void ClapTrap::throwGrenade(const std::string &target)
+    {
+        cout << "ClapTrap " << this->name << " throws a grenade at " << target << "!" << endl;
     }

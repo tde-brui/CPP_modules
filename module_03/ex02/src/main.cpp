@@ -1,4 +1,4 @@
-#include "FragTrap.hpp"
+#include "../inc/FragTrap.hpp"
 
 int main()
 {
@@ -6,5 +6,7 @@ int main()
     FragTrap opp2("opp2");
 
     opp1.highFivesGuys();
+    opp1.throwGrenade("opp2");
     opp2.highFivesGuys();
+    opp2.throwGrenade("opp1");
 }
