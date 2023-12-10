@@ -33,7 +33,7 @@ Fixed::~Fixed()
 Fixed::Fixed(const int value)
 {
     cout << "Int constructor called" << endl;
-    this->value = value << this->fractional_bits;
+    this->value = value << this->fractional_bits; 
 }
 
 Fixed::Fixed(const float value)

@@ -28,6 +28,7 @@ class Fixed
         float toFloat(void) const;
         int toInt(void) const;
 
+        //comparison operators
         Fixed operator<(const Fixed &fixed) const;
         Fixed operator>(const Fixed &fixed) const;
         Fixed operator<=(const Fixed &fixed) const;
@@ -35,20 +36,22 @@ class Fixed
         Fixed operator==(const Fixed &fixed) const;
         Fixed operator!=(const Fixed &fixed) const;
 
+        //arithmetic operators
         Fixed operator+(const Fixed &fixed) const;
         Fixed operator-(const Fixed &fixed) const;
         Fixed operator*(const Fixed &fixed) const;
         Fixed operator/(const Fixed &fixed) const;
 
+        //increment and decrement operators
         Fixed &operator++(); //pre-increment
         Fixed operator++(int); //post-increment
         Fixed &operator--(); //pre-decrement
         Fixed operator--(int); //post-decrement
 
-        Fixed &min(Fixed &fixed1, Fixed &fixed2);
-        Fixed &min(Fixed const &fixed1, &Fixed const &fixed2);
-        Fixed &max(Fixed &fixed1, Fixed &fixed2);
-        Fixed &max(Fixed const &fixed1, Fixed const &fixed2);
+        static Fixed &min(Fixed &fixed1, Fixed &fixed2);
+        static const Fixed &min(Fixed const &fixed1, Fixed const &fixed2);
+        static Fixed &max(Fixed &fixed1, Fixed &fixed2);
+        static const Fixed &max(Fixed const &fixed1, Fixed const &fixed2);
 };
 
 std::ostream &operator<<(std::ostream &out, const Fixed &fixed);
