@@ -21,7 +21,6 @@ void replaceLine(std::string &filename, std::string s1, std::string s2)
     }
     std::string line;
 
-    int s1_len = s1.length();
     while (std::getline(infile, line))
     {
         int start_pos = 0;
@@ -31,7 +30,7 @@ void replaceLine(std::string &filename, std::string s1, std::string s2)
             {
                 new_line += line.substr(start_pos, pos - start_pos);
                 new_line += s2;
-                start_pos = pos + s1_len;
+                start_pos = pos + s1.length();
             }
         new_line += line.substr(start_pos, line.length() - start_pos);
         outfile << new_line << endl;
@@ -51,4 +50,5 @@ int main(int argc, char **argv)
     std::string s1 = argv[2];
     std::string s2 = argv[3];
     replaceLine(filename, s1, s2);
+    return (0);
 }

@@ -28,7 +28,7 @@ Fixed::~Fixed()
 
 Fixed::Fixed(const int value)
 {
-    this->value = value << this->fractional_bits; 
+    this->value = value << this->fractional_bits; // converts value to fixed point representation
 }
 
 Fixed::Fixed(const float value)
@@ -66,46 +66,46 @@ std::ostream &operator<<(std::ostream &out, const Fixed &fixed)
 }
 
 //comparison operators implementation
-Fixed Fixed::operator<(const Fixed &fixed) const
+bool Fixed::operator<(const Fixed &fixed) const
 {
-    Fixed res(this->toFloat() < fixed.toFloat());
-
-    return (res);
+    if (this->toFloat() < fixed.toFloat())
+        return (true);
+    return (false);
 }
 
-Fixed Fixed::operator>(const Fixed &fixed) const
+bool Fixed::operator>(const Fixed &fixed) const
 {
-    Fixed res(this->toFloat() > fixed.toFloat());
-
-    return (res);
+    if (this->toFloat() > fixed.toFloat())
+        return (true);
+    return (false);
 }
 
-Fixed Fixed::operator>=(const Fixed &fixed) const
+bool Fixed::operator>=(const Fixed &fixed) const
 {
-    Fixed res(this->toFloat() >=  fixed.toFloat());
-
-    return (res);
+    if (this->toFloat() >= fixed.toFloat())
+        return (true);
+    return (false);
 }
 
-Fixed Fixed::operator<=(const Fixed &fixed) const
+bool Fixed::operator<=(const Fixed &fixed) const 
 {
-    Fixed res(this->toFloat() <= fixed.toFloat());
-
-    return (res);
+    if (this->toFloat() <= fixed.toFloat())
+        return (true);
+    return (false);
 }
 
-Fixed Fixed::operator==(const Fixed &fixed) const
+bool Fixed::operator==(const Fixed &fixed) const
 {
-    Fixed res(this->toFloat() == fixed.toFloat());
-
-    return (res);
+    if (this->toFloat() == fixed.toFloat())
+        return (true);
+    return (false);
 }
 
-Fixed Fixed::operator!=(const Fixed &fixed) const
+bool Fixed::operator!=(const Fixed &fixed) const
 {
-    Fixed res(this->toFloat() != fixed.toFloat());
-
-    return (res);
+    if (this->toFloat() != fixed.toFloat())
+        return (true);
+    return (false);
 }
 
 //arithmetic operators implementation

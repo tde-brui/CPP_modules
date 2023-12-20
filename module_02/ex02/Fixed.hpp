@@ -29,12 +29,12 @@ class Fixed
         int toInt(void) const;
 
         //comparison operators
-        Fixed operator<(const Fixed &fixed) const;
-        Fixed operator>(const Fixed &fixed) const;
-        Fixed operator<=(const Fixed &fixed) const;
-        Fixed operator>=(const Fixed &fixed) const;
-        Fixed operator==(const Fixed &fixed) const;
-        Fixed operator!=(const Fixed &fixed) const;
+        bool operator<(const Fixed &fixed) const;
+        bool operator>(const Fixed &fixed) const;
+        bool operator<=(const Fixed &fixed) const;
+        bool operator>=(const Fixed &fixed) const;
+        bool operator==(const Fixed &fixed) const;
+        bool operator!=(const Fixed &fixed) const;
 
         //arithmetic operators
         Fixed operator+(const Fixed &fixed) const;
@@ -55,6 +55,5 @@ class Fixed
 };
 
 std::ostream &operator<<(std::ostream &out, const Fixed &fixed);
-
 
 #endif
