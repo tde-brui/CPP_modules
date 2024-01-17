@@ -26,9 +26,16 @@
             this->attack_damage = claptrap.attack_damage;
             this->energy_points = claptrap.energy_points;
             this->hitpoints = claptrap.hitpoints;
-            return (*this);
         }
         return (*this);
+    }
+
+    ClapTrap::ClapTrap(const ClapTrap &claptrap)
+    {
+        this->name = claptrap.name;
+        this->attack_damage = claptrap.attack_damage;
+        this->energy_points = claptrap.energy_points;
+        this->hitpoints = claptrap.hitpoints;
     }
 
     ClapTrap::~ClapTrap()

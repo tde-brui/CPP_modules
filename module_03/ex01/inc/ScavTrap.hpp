@@ -2,11 +2,6 @@
 
 class ScavTrap : public ClapTrap
 {
-    private:
-        std::string name;
-        int hitpoints;
-        int energy_points;
-        int attack_damage;
     public:
         void attack(const std::string &target);
         ScavTrap();
@@ -15,4 +10,6 @@ class ScavTrap : public ClapTrap
         ScavTrap &operator=(const ScavTrap &scavtrap);
         ~ScavTrap();
         void guardGate(void);
+        int get_Hitpoints() const;
+        virtual std::string getClass() const;
 };

@@ -146,7 +146,7 @@ Fixed &Fixed::operator++()
 
 Fixed Fixed::operator++(int)
 {
-    Fixed tmp(*this);
+    Fixed tmp(*this); 
 
     this->value += 1;
     return (tmp);

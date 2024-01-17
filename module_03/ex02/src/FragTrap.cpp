@@ -39,3 +39,8 @@ void FragTrap::highFivesGuys(void)
 {
     cout << this->name << ": Teamwork deserves a high five, don't you think?" << endl;
 }
+
+std::string FragTrap::getClass() const
+{
+    return ("FragTrap ");
+}

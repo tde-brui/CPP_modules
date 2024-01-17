@@ -4,7 +4,7 @@ using std::cout;
 using std::endl;
 class ClapTrap
 {
-    private:
+    protected:
         std::string name;
         int hitpoints;
         int energy_points;
@@ -16,9 +16,11 @@ class ClapTrap
         ClapTrap(const ClapTrap &claptrap);
         ClapTrap &operator=(const ClapTrap &claptrap);
         ~ClapTrap();
-        void attack(const std::string &target);
+        virtual void attack(const std::string &target);
         void takeDamage(unsigned int amount);
         void beRepaired(unsigned int amount);
         int get_AttackDamage(void);
         void get_Stats(void);
+        virtual std::string getClass() const;
+        int get_AttackDamage() const;
 };

@@ -18,6 +18,14 @@ ScavTrap::ScavTrap(const std::string &name)
     this->hitpoints = 100;
 }
 
+ScavTrap::ScavTrap(const ScavTrap &scavtrap)
+{
+    this->name = scavtrap.name;
+    this->attack_damage = scavtrap.attack_damage;
+    this->energy_points = scavtrap.energy_points;
+    this->hitpoints = scavtrap.hitpoints;
+}
+
 ScavTrap &ScavTrap::operator=(const ScavTrap &scavtrap)
 {
     if (this != &scavtrap)
@@ -55,4 +63,14 @@ void ScavTrap::guardGate()
 ScavTrap::~ScavTrap()
 {
     cout << "A ScavTrap " << " has been destroyed!" << endl;
+}
+
+std::string ScavTrap::getClass() const
+{
+    return "ScavTrap ";
+}
+
+int ScavTrap::get_Hitpoints() const
+{
+    return (this->hitpoints);
 }
