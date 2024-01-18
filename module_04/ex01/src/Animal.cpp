@@ -2,7 +2,22 @@
 
 Animal::Animal()
 {
+    this->type = "Animal";
     cout << "An animal has been created!" << endl;
+}
+
+Animal::Animal(const Animal &animal)
+{
+    this->type = animal.type;
+    cout << "An animal has been created!" << endl;
+}
+
+Animal &Animal::operator=(const Animal &animal)
+{
+    if (this != &animal)
+        this->type = animal.type;
+    cout << "An animal has been created!" << endl;
+    return (*this);
 }
 
 Animal::~Animal()
@@ -17,5 +32,10 @@ std::string Animal::getType() const
 
 void Animal::makeSound() const
 {
-    cout << "Animal sound!" << endl;
+    if (this->getType() == "Cat")
+        cout << "Meow!" << endl;
+    else if (this->getType() == "Dog")
+        cout << "Woof!" << endl;
+    else
+        cout << "generic Animal sound!" << endl;
 }

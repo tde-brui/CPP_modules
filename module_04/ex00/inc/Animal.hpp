@@ -7,7 +7,7 @@ using std::endl;
 
 class Animal
 {
-    private:
+    protected:
         std::string type;
 
     public:
@@ -16,8 +16,8 @@ class Animal
         Animal(const Animal &animal);
         Animal &operator=(const Animal &animal);
         
-        virtual std::string getType() const;
-        virtual void makeSound() const;
+        std::string getType() const;
+        void makeSound() const;
 
 };
 

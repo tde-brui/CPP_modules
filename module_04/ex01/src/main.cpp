@@ -1,11 +1,13 @@
 #include "../inc/Animal.hpp"
 #include "../inc/Dog.hpp"
 #include "../inc/Cat.hpp"
+#include "../inc/Brain.hpp"
 
 int main()
 {
-    int num = 2;
+    int num = 10;
     Animal *animals[num];
+
     for (int i = 0; i < num; i++)
     {
         if (i % 2 == 0)

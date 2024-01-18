@@ -4,18 +4,15 @@
 # include "Brain.hpp"
 
 class Cat : public Animal
-{
-
+{   
     private:
-        std::string type;
-        Brain       *brain;
-    
+        Brain *brain;
+
     public:
         Cat();
         ~Cat();
         Cat(const Cat &cat);
         Cat &operator=(const Cat &cat);
-
         void makeSound() const;
 };
 

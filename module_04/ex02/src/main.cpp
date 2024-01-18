@@ -5,5 +5,11 @@
 int main()
 {
     Animal *dog = new Dog();
-    //Animal *Animal = new Animal();
+    Animal *cat = new Cat();
+    dog->makeSound();
+    cat->makeSound();
+    // Animal *Animal = new Animal(); // Animal is an abstract class so this is not allowed
+    // Animal->makeSound();
+    delete dog;
+    delete cat;
 }
