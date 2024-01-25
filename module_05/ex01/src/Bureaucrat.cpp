@@ -1,4 +1,5 @@
 #include "../inc/Bureaucrat.hpp"
+#include "../inc/Form.hpp"
 
 Bureaucrat::Bureaucrat() : name("default")
 {
@@ -88,4 +89,17 @@ std::ostream &operator<<(std::ostream &out, const Bureaucrat &bureaucrat)
 {
     out << bureaucrat.getName() << ", bureaucrat grade: " << bureaucrat.getGrade() << std::endl;
     return (out);
+}
+
+void Bureaucrat::signForm(Form &form)
+{
+    if (this->getGrade() <= form.getRequiredGradeToSign())
+    {
+        std::cout << this->name << " signed " << form.getName() << std::endl; 
+        form.setTrue();
+    }
+    else
+    {
+        std::cout << this->name << " couldn't sign " << form.getName() << " because their grade is too low" << std::endl;
+    }
 }

@@ -1,40 +1,25 @@
 #include "../inc/Bureaucrat.hpp"
+#include "../inc/Form.hpp"
 
 int main()
 {
-    try {
-        Bureaucrat bureaucrat1;
-        Bureaucrat bureaucrat2;
+    try
+    {
+        Form form1("Police form", false, 50, 50);
+        std::cout << form1 << std::endl;
 
-        std::cout << bureaucrat1 << bureaucrat2;
+        Bureaucrat bureaucrat1("Henk", 150);
+        bureaucrat1.signForm(form1);
 
-        Bureaucrat bureaucrat3(129);
-        Bureaucrat bureaucrat4(1);
+        std::cout << std::endl;
 
-        std::cout << bureaucrat3 << bureaucrat4;
+        form1.beSigned(bureaucrat1);
 
-        Bureaucrat bureaucrat5("Willem", 50);
-        Bureaucrat bureaucrat6("John", 50);
-
-        std::cout << bureaucrat5 << bureaucrat6;
-
-        Bureaucrat bureaucrat7 = bureaucrat1;
-        Bureaucrat bureaucrat8(bureaucrat5);
-
-        std::cout << bureaucrat7 << bureaucrat8;
-
-        bureaucrat8.decreaseGrade(50);
-
-        std::cout << bureaucrat8;
-
-        bureaucrat8.decreaseGrade(50);
+        std::cout << form1 << std::endl;
     }
-    catch (const Bureaucrat::GradeTooHighException &e)
+    catch(const Form::GradeTooLowException &e)
     {
         std::cout << e.what() << std::endl;
     }
-    catch (const Bureaucrat::GradeTooLowException &e)
-    {
-        std::cout << e.what() << std::endl;
-    }
+    
 }

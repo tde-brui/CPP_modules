@@ -1,6 +1,8 @@
 #ifndef BUREAUCRAT_HPP
 # define BUREAUCRAT_HPP
-# include "iostream"
+# include <iostream>
+
+class Form;
 
 class Bureaucrat
 {
@@ -17,7 +19,6 @@ class Bureaucrat
         ~Bureaucrat();
         const std::string getName() const;
         int getGrade() const;
-        //const std::string accessName() const;
         void increaseGrade(int amount);
         void decreaseGrade(int amount);
         class GradeTooHighException : public std::exception
@@ -30,6 +31,8 @@ class Bureaucrat
             public:
                 const char *what() const noexcept;
         };
+
+        void signForm(Form &form);
 };
 
 std::ostream &operator<<(std::ostream &out, const Bureaucrat &bureaucrat);

@@ -1,4 +1,4 @@
-NAME = Bureaucrat
+NAME = Form
 CC = c++
 CFLAGS = -Wall -Wextra -Werror
 BUILD_DIR = build
