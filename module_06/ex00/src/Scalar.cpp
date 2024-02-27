@@ -1,4 +1,4 @@
-#include "../inc/Scalar.hpp"
+#include "../inc/ScalarConverter.hpp"
 #include <string.h>
 
 void ScalarConverter::convert(const std::string &input)
