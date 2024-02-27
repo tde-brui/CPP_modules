@@ -8,7 +8,7 @@ int main()
 
         std::cout << bureaucrat1 << bureaucrat2;
 
-        Bureaucrat bureaucrat3(129);
+        Bureaucrat bureaucrat3(100);
         Bureaucrat bureaucrat4(1);
 
         std::cout << bureaucrat3 << bureaucrat4;

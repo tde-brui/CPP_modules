@@ -6,10 +6,10 @@ using std::string;
 class ScalarConverter
 {
 	public:
-	ScalarConverter();
-	ScalarConverter(const ScalarConverter &obj);
-	~ScalarConverter();
-	ScalarConverter &operator=(const ScalarConverter &obj);
+		ScalarConverter();
+		ScalarConverter(const ScalarConverter &obj);
+		~ScalarConverter();
+		ScalarConverter &operator=(const ScalarConverter &obj);
 
-	static void convert(const std::string &input);
+		static void convert(const std::string &input);
 };
