@@ -1,22 +1,41 @@
 #include "../inc/ScalarConverter.hpp"
 #include <string.h>
 
+ScalarConverter::ScalarConverter()
+{
+}
+
+ScalarConverter::~ScalarConverter()
+{
+}
+
+ScalarConverter::ScalarConverter(const ScalarConverter &obj)
+{
+	(void)obj;
+}
+
+ScalarConverter &ScalarConverter::operator=(const ScalarConverter &obj)
+{
+	(void)obj;
+	return *this;
+}
+
 void ScalarConverter::convert(const std::string &input)
 {
 	cout << "input: " << input << endl;
 	cout << "char: ";
 	try
 	{
+		if (input == "nan" || input == "nanf")
+			throw std::exception();
 		char c = static_cast<char>(stoi(input));
 		if (c < 32 || c > 126)
 			cout << "Non displayable" << endl;
 		else
 			cout << "'" << c << "'" << endl;
 	}
-	catch(const std::exception& e)
-	{
+	catch(const std::exception& e){
 		cout << "impossible" << endl;
-	
 	}
 	cout << "int: ";
 	try
@@ -54,5 +73,4 @@ void ScalarConverter::convert(const std::string &input)
 	{
 		cout << "impossible" << endl;
 	}
-
 }
