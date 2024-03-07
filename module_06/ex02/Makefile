@@ -1,4 +1,4 @@
-NAME = Cast
+NAME = dynamic_cast
 CC = c++
 CFLAGS = -Wall -Wextra -Werror
 BUILD_DIR = build

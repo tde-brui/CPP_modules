@@ -22,7 +22,6 @@ ScalarConverter &ScalarConverter::operator=(const ScalarConverter &obj)
 
 void ScalarConverter::convert(const std::string &input)
 {
-	cout << "input: " << input << endl;
 	cout << "char: ";
 	try
 	{
