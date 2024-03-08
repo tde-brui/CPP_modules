@@ -32,7 +32,7 @@ void display_float(const std::string &input)
 	if (static_cast<int>(f) - f == 0)
 	{
 		std::cout << "float: " << f << ".0f" << std::endl;
-		std::cout << "double " << f << ".0" << std::endl;
+		std::cout << "double " << static_cast<double>(f) << ".0" << std::endl;
 	}
 	else
 	{
