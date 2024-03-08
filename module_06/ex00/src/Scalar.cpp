@@ -1,5 +1,4 @@
 #include "../inc/ScalarConverter.hpp"
-#include <string.h>
 
 ScalarConverter::ScalarConverter()
 {
@@ -20,56 +19,118 @@ ScalarConverter &ScalarConverter::operator=(const ScalarConverter &obj)
 	return *this;
 }
 
+bool check_if_float(const std::string &input)
+{
+	int i = 0;
+	int dot = 0;
+	int f = 0;
+	if (input[i] == '-' || input[i] == '+')
+		i++;
+	if (input[i] == '\0')
+		return false;
+	for(; input[i]; i++)
+	{
+		if (input[i] == '.')
+			dot++;
+		else if (input[i] == 'f' && input[i + 1] == '\0')
+			f++;
+		else if (!isdigit(input[i]))
+			return false;
+	}
+	if (dot == 1 && f == 1)
+		return true;
+	return false;
+}
+
+bool check_if_double(const std::string &input)
+{
+	int i = 0;
+	int dot = 0;
+	if (input[i] == '-' || input[i] == '+')
+		i++;
+	if (input[i] == '\0')
+		return false;
+	for(; input[i]; i++)
+	{
+		if (input[i] == '.')
+			dot++;
+		else if (!isdigit(input[i]))
+			return false;
+	}
+	if (dot == 1)
+		return true;
+	return false;
+}
+
+bool check_if_int(const std::string &input)
+{
+	int i = 0;
+	if (input[i] == '-' || input[i] == '+')
+		i++;
+	if (input[i] == '\0')
+		return false;
+	for(; input[i]; i++)
+	{
+		if (input[i] == '-' || input[i] == '+')
+			return false;
+		else if (!isdigit(input[i]))
+			return false;
+	}
+	return true;
+}
+
+literal_type getType(const std::string &input)
+{
+	if (input.length() == 1 && isalpha(input[0]))
+		return CHAR;
+	else if (check_if_float(input))
+		return FLOAT;
+	else if (check_if_int(input))
+		return INT;
+	else if (check_if_double(input))
+		return DOUBLE;
+	else if (input == "+inf" || input == "-inf" || input == "nan" || input == "nanf" || input == "-inff" || input == "+inff")
+		return WORD;
+	return INVALID;
+}
+
 void ScalarConverter::convert(const std::string &input)
 {
-	cout << "char: ";
-	try
+	literal_type type = getType(input);
+	switch(type)
 	{
-		if (input == "nan" || input == "nanf")
-			throw std::exception();
-		char c = static_cast<char>(stoi(input));
-		if (c < 32 || c > 126)
-			cout << "Non displayable" << endl;
-		else
-			cout << "'" << c << "'" << endl;
-	}
-	catch(const std::exception& e){
-		cout << "impossible" << endl;
-	}
-	cout << "int: ";
-	try
-	{
-		int i = static_cast<int>(stoi(input));
-		cout << i << endl;
-	}
-	catch(const std::exception& e)
-	{
-		cout << "impossible" << endl;
-	}
-	cout << "float: ";
-	try
-	{
-		float f = static_cast<float>(stof(input));
-		cout << f;
-		if (f - static_cast<int>(f) == 0)
-			cout << ".0";
-		cout << "f" << endl;
-	}
-	catch(const std::exception& e)
-	{
-		cout << "impossible" << endl;
-	}
-	cout << "double: ";
-	try
-	{
-		double d = static_cast<double>(stod(input));
-		cout << d;
-		if (d - static_cast<int>(d) == 0)
-			cout << ".0";
-		cout << endl;
-	}
-	catch(const std::exception& e)
-	{
-		cout << "impossible" << endl;
+		case CHAR:
+		{
+			display_char(input);
+			break ;
+		}
+		case INT:
+		{
+			display_int(input);
+			break ;
+		}
+		case FLOAT:
+		{
+			display_float(input);
+			break ;
+		}
+		case DOUBLE:
+		{
+			display_double(input);
+			break ;
+		}
+		case WORD:
+		{
+			display_word(input);
+			break ;
+		}
+		case INVALID:
+		{
+			std::cout << "char: impossible" << std::endl;
+			std::cout << "int: impossible" << std::endl;
+			std::cout << "float: impossible" << std::endl;
+			std::cout << "double: impossible" << std::endl;
+			break ;
+		}
 	}
 }
