@@ -2,6 +2,7 @@
 #include <vector>
 #include <list>
 #include <iostream>
+#include <stack>
 
 template <typename T>
 int easyfind(T &t, int target)

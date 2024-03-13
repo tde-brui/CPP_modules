@@ -12,4 +12,14 @@ int main()
 	list1.push_back(4);
 
 	std::cout << ::easyfind(list1, 3) << std::endl;
+
+	std::stack<int> stack1;
+	stack1.push(10);
+	stack1.push(20);
+	stack1.push(30);
+	stack1.push(40);
+	stack1.push(50);
+	stack1.push(60);
+
+	std::cout << ::easyfind(stack1, 20) << std::endl;
 }
