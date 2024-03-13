@@ -25,24 +25,36 @@ Span &Span::operator=(const Span &span)
 
 void Span::addNumber(int num)
 {
-	if (this->size() >= N)
+	if (vec1.size() >= N)
 		throw(std::length_error("Vector is full"));
 	vec1.push_back(num);
 }
 
 unsigned int Span::shortestSpan()
 {
-	if (this->size() == 0 || this->size() == 1)
+	if (vec1.size() < 2)
 		throw (std::length_error("List is too short"));
-	return (1);
+	int minspan = *std::max_element(vec1.begin(), vec1.end());
+	int span = 0;
+	for (int i = 0; i < static_cast<int>(vec1.size()); i++)
+	{
+		for (int j = i + 1; j < static_cast<int>(vec1.size()); j++)
+		{
+			span = std::abs(vec1[i] - vec1[j]);
+			minspan = std::min(span, minspan);
+		}
+	}
+	return (minspan);
 
 }
 
 unsigned int Span::longestSpan()
 {
-	if (this->size() == 0 || this->size() == 1)
-		throw (std::length_error("List is too short"));
-	return (1);
+	if (vec1.size() < 2)
+		throw(std::length_error("List is too short"));
+	auto min_iter = std::min_element(vec1.begin(), vec1.end());
+	auto max_iter = std::max_element(vec1.begin(), vec1.end());
+	return (*max_iter - *min_iter);
 	
 }
 
