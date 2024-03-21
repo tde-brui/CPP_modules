@@ -1,6 +1,6 @@
 NAME = btc
 CC = c++
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -std=c++11
 BUILD_DIR = build
 SRC_DIR = src
 INC_DIR = inc
