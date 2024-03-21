@@ -4,7 +4,7 @@
 #include <stack>
 #include <deque>
 
-template <typename T, typename Container = std::deque<T>>
+template <typename T>
 class MutantStack : public std::stack<T>
 {
     public:
@@ -12,7 +12,7 @@ class MutantStack : public std::stack<T>
         ~MutantStack() {};
         MutantStack(const MutantStack &mutantstack) { *this = mutantstack; };
         MutantStack &operator=(const MutantStack &mutantstack) { (void)mutantstack; return *this; };
-        using iterator = typename Container::iterator;
+        using iterator = typename std::deque<T>::iterator;
 
         iterator begin()
         {
