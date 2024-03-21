@@ -14,9 +14,9 @@ class BitcoinExchange
 
 	public:
 		BitcoinExchange();
-		BitcoinExchange(const std::string &filename);
 		~BitcoinExchange();
 		BitcoinExchange(const BitcoinExchange &bitcoinexchange);
 		BitcoinExchange &operator=(const BitcoinExchange &bitcoinexchange);
+		void Parseline(std::string line);
 
 };
