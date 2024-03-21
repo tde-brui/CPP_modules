@@ -9,10 +9,6 @@ int main()
 		{
 			sp.addNumber(i * 10);
 		}
-		for (int i = 1000; i < 10000; i++)
-		{
-			sp.addNumber(i * 100);
-		}
 		std::cout << sp.shortestSpan() << std::endl;
 		std::cout << sp.longestSpan() << std::endl;
 	}
