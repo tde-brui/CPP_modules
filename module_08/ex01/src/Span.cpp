@@ -36,16 +36,15 @@ unsigned int Span::shortestSpan()
 		throw (std::length_error("List is too short"));
 	int minspan = *std::max_element(vec1.begin(), vec1.end());
 	int span = 0;
-	for (int i = 0; i < static_cast<int>(vec1.size()); i++)
+
+	std::vector<int> vec2 = vec1;
+	std::sort(vec2.begin(), vec2.end());
+	for (size_t i = 0; i < vec2.size() - 1; i++)
 	{
-		for (int j = i + 1; j < static_cast<int>(vec1.size()); j++)
-		{
-			span = std::abs(vec1[i] - vec1[j]);
-			minspan = std::min(span, minspan);
-		}
+		span = std::abs(vec2[i] - vec2[i + 1]);
+		minspan = std::min(span, minspan);
 	}
 	return (minspan);
-
 }
 
 unsigned int Span::longestSpan()
