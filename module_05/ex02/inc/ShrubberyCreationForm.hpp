@@ -1,4 +1,5 @@
 #include "Aform.hpp"
+#include "Bureaucrat.hpp"
 
 class ShrubberyCreationForm : public Aform
 {
@@ -6,6 +7,7 @@ class ShrubberyCreationForm : public Aform
         std::string target;
 
     public:
+        ShrubberyCreationForm();
         ShrubberyCreationForm(std::string const &target);
         ShrubberyCreationForm(ShrubberyCreationForm const &other);
         ShrubberyCreationForm &operator=(ShrubberyCreationForm const &other);

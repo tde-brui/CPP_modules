@@ -1,4 +1,5 @@
 #include "Aform.hpp"
+#include "Bureaucrat.hpp"
 
 class PresidentialPardonForm : public Aform
 {

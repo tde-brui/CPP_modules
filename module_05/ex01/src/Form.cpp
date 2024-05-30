@@ -71,8 +71,16 @@ const char *Form::GradeTooHighException::what() const noexcept
 
 void Form::beSigned(const Bureaucrat &bureaucrat)
 {
+    if (this->isSigned == true)
+    {
+        std::cout << "Bureaucrat " << bureaucrat.getName() << " couldnt sign " << this->getName() << " because it is already signed" << std::endl;
+        return;
+    }
     if (bureaucrat.getGrade() < this->getRequiredGradeToSign())
+    {
         this->isSigned = true;
+        std::cout << bureaucrat.getName() << " signs " << this->getName() << std::endl;
+    }
     else
         throw Form::GradeTooLowException();
 }

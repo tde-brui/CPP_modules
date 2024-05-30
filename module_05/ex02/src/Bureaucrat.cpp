@@ -100,11 +100,11 @@ void Bureaucrat::signForm(Aform &form)
     }
     else
     {
-        std::cout << this->name << " couldn't sign " << form.getName() << " because their grade is too low" << std::endl;
+        throw GradeTooLowException();
     }
 }
 
-void Bureaucrat::executeForm(Aform const &form)
+void Bureaucrat::executeForm(Aform const &form) const
 {
     form.execute(*this);
 }

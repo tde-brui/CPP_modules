@@ -61,12 +61,12 @@ std::ostream &operator<<(std::ostream &out, const Aform &aform)
 
 const char *Aform::GradeTooLowException::what() const noexcept
 {
-    return "Aform can't be signed, Bureaucrat grade is too low";
+    return "Bureaucrat grade is too low";
 }
 
 const char *Aform::GradeTooHighException::what() const noexcept
 {
-    return "Aform can't be signed, Bureaucrat grade is too high";
+    return "Bureaucrat grade is too high";
 }
 
 const char *Aform::FormNotSignedException::what() const noexcept
@@ -91,9 +91,5 @@ void Aform::setTrue()
 
 void Aform::execute(Bureaucrat const &executor) const
 {
-    if (this->getSignedStatus() == false)
-        throw Aform::FormNotSignedException();
-    if (executor.getGrade() > this->getRequiredGradeToExecute())
-        throw Aform::GradeTooLowException();
-    std::cout << executor.getName() << " executes " << this->getName() << std::endl;
+    executor.executeForm(*this);
 }
