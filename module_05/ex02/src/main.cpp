@@ -19,13 +19,13 @@ int main()
         std::cout << scf << std::endl;
         std::cout << rrf << std::endl;
 
-        // b1.signForm(ppf);
-        // b1.signForm(scf);
-        // b1.signForm(rrf);
+        b1.signForm(ppf);
+        b1.signForm(scf);
+        b1.signForm(rrf);
 
-        // b1.executeForm(ppf);
-        // b1.executeForm(scf);
-        // b1.executeForm(rrf);
+        b1.executeForm(ppf);
+        b1.executeForm(scf);
+        b1.executeForm(rrf);
 
         b2.signForm(scf);
         b2.signForm(rrf);
