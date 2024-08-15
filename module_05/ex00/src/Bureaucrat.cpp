@@ -58,20 +58,22 @@ int Bureaucrat::getGrade() const
 
 void Bureaucrat::increaseGrade(int amount)
 {
-    this->grade -= amount;
-    if (grade < 1)
+    int newGrade = this->grade - amount;
+    if (newGrade < 1)
         throw GradeTooHighException();
-    if (grade > 150)
+    if (newGrade > 150)
         throw GradeTooLowException();
+    this->grade = newGrade;
 }
 
 void Bureaucrat::decreaseGrade(int amount)
 {
-    this->grade += amount;
-    if (grade < 1)
+    int newGrade = this->grade + amount;
+    if (newGrade < 1)
         throw GradeTooHighException();
-    if (grade > 150)
+    if (newGrade > 150)
         throw GradeTooLowException();
+    this->grade = newGrade;
 }
 
 const char *Bureaucrat::GradeTooHighException::what() const noexcept

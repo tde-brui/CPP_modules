@@ -1,4 +1,4 @@
-NAME = AForm
+NAME = Intern
 CC = c++
 CFLAGS = -Wall -Wextra -Werror
 BUILD_DIR = build

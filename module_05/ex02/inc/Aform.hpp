@@ -17,7 +17,7 @@ class Aform
         Aform(const Aform &aform);
         Aform(std::string name, bool isSigned, int requiredGradeToSign, int requiredGradeToExecute);
         Aform &operator=(const Aform &aform);
-        ~Aform();
+        virtual ~Aform();
 
         const std::string getName() const;
         bool  getSignedStatus() const;

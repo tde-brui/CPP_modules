@@ -3,19 +3,35 @@
 
 Form::Form() : name("default"), isSigned(false), requiredGradeToSign(150), requiredGradeToExecute(150)
 {
+    if (requiredGradeToSign < 1)
+        throw Form::GradeTooHighException();
+    if (requiredGradeToSign > 150)
+        throw Form::GradeTooLowException();
 }
 
 Form::Form(std::string newName, bool newisSigned, int newRequiredGradeToSign, int newRequiredGradeToExecute) : name(newName), requiredGradeToSign(newRequiredGradeToSign), requiredGradeToExecute(newRequiredGradeToExecute)
 {
+    if (requiredGradeToSign < 1)
+        throw Form::GradeTooHighException();
+    if (requiredGradeToSign > 150)
+        throw Form::GradeTooLowException();
     this->isSigned = newisSigned;
 }
 
 Form::Form(const Form &form) : name(form.name), isSigned(form.isSigned), requiredGradeToSign(form.requiredGradeToSign), requiredGradeToExecute(form.requiredGradeToExecute)
 {
+    if (requiredGradeToSign < 1)
+        throw Form::GradeTooHighException();
+    if (requiredGradeToSign > 150)
+        throw Form::GradeTooLowException();
 }
 
 Form &Form::operator=(const Form &form)
 {
+    if (requiredGradeToSign < 1)
+        throw Form::GradeTooHighException();
+    if (requiredGradeToSign > 150)
+        throw Form::GradeTooLowException();
     if (this != &form)
         this->isSigned = form.isSigned;
     return (*this);
@@ -76,7 +92,7 @@ void Form::beSigned(const Bureaucrat &bureaucrat)
         std::cout << "Bureaucrat " << bureaucrat.getName() << " couldnt sign " << this->getName() << " because it is already signed" << std::endl;
         return;
     }
-    if (bureaucrat.getGrade() < this->getRequiredGradeToSign())
+    else if (bureaucrat.getGrade() <= this->getRequiredGradeToSign())
     {
         this->isSigned = true;
         std::cout << bureaucrat.getName() << " signs " << this->getName() << std::endl;

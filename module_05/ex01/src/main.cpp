@@ -5,30 +5,33 @@ int main()
 {
     try
     {
-        Form form1("Police form", false, 50, 50);
-        std::cout << form1 << std::endl;
+        Form form1("Form1", false, 150, 150);
+        Form form2("Form2", false, 1, 1);
+        Form form3("Form3", false, 75, 75);
+        //Form form4("Form4", false, 0, 0); throws exception
+        //Form form5("Form5", false, 151, 151); throws exception
 
+        std::cout << form1 << std::endl << form2 << std::endl << form3 << std::endl;
 
-        Bureaucrat bureaucrat2("Piet", 50);
-        bureaucrat2.signForm(form1);
+        Bureaucrat bureaucrat1("Bureaucrat1", 1);
+        Bureaucrat bureaucrat2("Bureaucrat2", 150);
+        
+        std::cout << bureaucrat1 << std::endl << bureaucrat2 << std::endl;
 
-        std::cout << form1 << std::endl;
-        Bureaucrat bureaucrat1("Henk", 150);
         bureaucrat1.signForm(form1);
+        bureaucrat2.signForm(form2);
+        bureaucrat2.signForm(form3);
 
-        std::cout << std::endl;
+        form2.beSigned(bureaucrat1);
+        form3.beSigned(bureaucrat1);
 
-        form1.beSigned(bureaucrat1);
+        Form form4("Form4", false, 75, 75);
+        Bureaucrat bureaucrat3("Bureaucrat3", 76);
 
-        std::cout << form1 << std::endl;
+        form4.beSigned(bureaucrat3);
 
-        Form form2("School form", false, 5, 5);
-        std::cout << form2 << std::endl;
-
-        Bureaucrat bureaucrat3("Kees", 10);
-        bureaucrat3.signForm(form2);
     }
-    catch(const Form::GradeTooLowException &e)
+    catch(const std::exception &e)
     {
         std::cout << e.what() << std::endl;
     }

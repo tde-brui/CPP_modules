@@ -7,6 +7,7 @@
 int main()
 {
     try{
+        //Aform a1("Aform1", 1, 1);
         Bureaucrat b1("Bureaucrat1", 1);
         Bureaucrat b2("Bureaucrat2", 50);
         PresidentialPardonForm ppf("target1");
