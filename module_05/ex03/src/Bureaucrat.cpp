@@ -95,9 +95,10 @@ void Bureaucrat::signForm(Aform &form)
 {
     if (form.getSignedStatus() == true)
     {
-        std::cout << this->name << " can't sign " << form.getName() << " because it's already signed" << std::endl;
-        return ;
+        std::cout << this->name << " couldnt sign " << form.getName() << " because it is already signed" << std::endl;
+        return;
     }
+    else
     if (this->getGrade() <= form.getRequiredGradeToSign())
     {
         std::cout << this->name << " signed " << form.getName() << std::endl; 
@@ -105,11 +106,26 @@ void Bureaucrat::signForm(Aform &form)
     }
     else
     {
-        throw GradeTooLowException();
+        std::cout << this->name << " could not sign " << form.getName() << " because it's grade is too low" << std::endl;
+        return;
     }
 }
 
 void Bureaucrat::executeForm(Aform const &form) const
 {
-    form.execute(*this);
+    if (form.getSignedStatus() == false)
+    {
+        std::cout << this->name << "could not execute " << form.getName() << " because it has not been signed yet" << std::endl;
+        return;
+    }
+    else if (form.getRequiredGradeToExecute() < this->getGrade())
+    {
+        std::cout << this->name << " could not execute " << form.getName() << " because it's grade is too low" << std::endl;
+        return;
+    }
+    else
+    {
+        std::cout << this->name << " executes " << form.getName() << std::endl;
+        form.execute(*this);
+    }
 }

@@ -77,12 +77,12 @@ std::ostream &operator<<(std::ostream &out, const Form &form)
 
 const char *Form::GradeTooLowException::what() const noexcept
 {
-    return "Form can't be signed, Bureaucrat grade is too low";
+    return "Error: Form::GradeTooLowException!";
 }
 
 const char *Form::GradeTooHighException::what() const noexcept
 {
-    return "Form can't be signed, Bureaucrat grade is too high";
+    return "Error: Form::GradeTooHighException!";
 }
 
 void Form::beSigned(const Bureaucrat &bureaucrat)

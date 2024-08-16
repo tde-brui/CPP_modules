@@ -42,7 +42,9 @@ class Aform
             public:
                 const char *what() const noexcept;
         };
-        virtual void execute(Bureaucrat const &executor) const = 0;
+        void execute(Bureaucrat const &executor) const;
+        virtual void executeForm(void) const = 0;
+
 };
 
 std::ostream &operator<<(std::ostream &out, const Aform &aform);

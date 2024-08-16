@@ -3,31 +3,31 @@
 int main()
 {
     try {
-        Bureaucrat bureaucrat1;
-        Bureaucrat bureaucrat2;
+        //Bureaucrat tooHighBureau("Too High Bureau", 0); //GradeTooHighException
+        //Bureaucrat tooLowBureau("Too Low Bureau", 151); //GradeTooLowException
 
-        std::cout << bureaucrat1 << bureaucrat2;
+        Bureaucrat b1("Bureaucrat1", 1);
+        Bureaucrat b2("Bureaucrat2", 150);
 
-        Bureaucrat bureaucrat3(100);
-        Bureaucrat bureaucrat4(1);
+        std::cout << b1 << std::endl;
+        std::cout << b2 << std::endl;
 
-        std::cout << bureaucrat3 << bureaucrat4;
+        //b1.increaseGrade(1); //GradeTooHighException
+        //b2.decreaseGrade(1); //GradeTooLowException
 
-        Bureaucrat bureaucrat5("Willem", 50);
-        Bureaucrat bureaucrat6("John", 50);
+        Bureaucrat b3;
+        Bureaucrat b4(100);
+        
+        std::cout << b3 << std::endl;
+        std::cout << b4 << std::endl;
 
-        std::cout << bureaucrat5 << bureaucrat6;
 
-        Bureaucrat bureaucrat7 = bureaucrat1;
-        Bureaucrat bureaucrat8(bureaucrat5);
+        //Demonstrating copy constructor and assignment operator
+        Bureaucrat b5(b1);
+        Bureaucrat b6 = b2;
 
-        std::cout << bureaucrat7 << bureaucrat8;
-
-        bureaucrat8.decreaseGrade(50);
-
-        std::cout << bureaucrat8;
-
-        bureaucrat8.decreaseGrade(50);
+        std::cout << b5 << std::endl;
+        std::cout << b6 << std::endl;
     }
     catch (const Bureaucrat::GradeTooHighException &e)
     {

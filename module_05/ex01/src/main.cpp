@@ -8,8 +8,8 @@ int main()
         Form form1("Form1", false, 150, 150);
         Form form2("Form2", false, 1, 1);
         Form form3("Form3", false, 75, 75);
-        //Form form4("Form4", false, 0, 0); throws exception
-        //Form form5("Form5", false, 151, 151); throws exception
+        //Form form4("Form4", false, 0, 0); //throws exception
+        //Form form5("Form5", false, 151, 151); //throws exception
 
         std::cout << form1 << std::endl << form2 << std::endl << form3 << std::endl;
 
@@ -24,11 +24,12 @@ int main()
 
         form2.beSigned(bureaucrat1);
         form3.beSigned(bureaucrat1);
+        form2.beSigned(bureaucrat2); // already signed
 
-        Form form4("Form4", false, 75, 75);
+        Form form6("Form6", false, 75, 75);
         Bureaucrat bureaucrat3("Bureaucrat3", 76);
 
-        form4.beSigned(bureaucrat3);
+        form6.beSigned(bureaucrat3); // will throw GradeTooLowException
 
     }
     catch(const std::exception &e)
