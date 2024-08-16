@@ -2,7 +2,6 @@
 
 int main(int argc, char **argv)
 {
-	(void)argv;
 	BitcoinExchange bitcoinexchange;
 	if (argc != 2)
 	{
@@ -10,5 +9,6 @@ int main(int argc, char **argv)
 		return 1;
 	}
 	bitcoinexchange.parseCvs();
-	bitcoinexchange.CompareDatabases(argv[1]);
+	bitcoinexchange.parseSecondDb(argv[1]);
+	bitcoinexchange.CompareDatabases();
 }
