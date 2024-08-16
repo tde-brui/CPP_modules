@@ -18,16 +18,8 @@ ShrubberyCreationForm &ShrubberyCreationForm::operator=(ShrubberyCreationForm co
 
 ShrubberyCreationForm::~ShrubberyCreationForm(){};
 
-void ShrubberyCreationForm::execute(Bureaucrat const &executor) const
+void ShrubberyCreationForm::executeForm(void) const
 {
-    if (this->getSignedStatus() == false)
-    {
-        throw Aform::FormNotSignedException();
-    }
-    if (executor.getGrade() > this->getRequiredGradeToExecute())
-    {
-        throw Aform::GradeTooLowException();
-    }
     std::ofstream file(this->target + "_shrubbery");
     if (!file.is_open())
     {

@@ -24,12 +24,13 @@ int main()
         b1.signForm(scf);
         b1.signForm(rrf);
 
-        b1.executeForm(ppf);
-        b1.executeForm(scf);
-        b1.executeForm(rrf);
+        ppf.execute(b1);
+        scf.execute(b1);
+        rrf.execute(b1);
 
-        b2.signForm(scf);
-        b2.signForm(rrf);
+        b2.executeForm(ppf);
+        b2.executeForm(scf);
+        b2.executeForm(rrf);
 
     }
     catch(const std::exception &e)

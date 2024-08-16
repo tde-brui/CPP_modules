@@ -91,5 +91,9 @@ void Aform::setTrue()
 
 void Aform::execute(Bureaucrat const &executor) const
 {
-    executor.executeForm(*this);
+    if (this->getSignedStatus() == false)
+        throw Aform::FormNotSignedException();
+    if (executor.getGrade() > this->getRequiredGradeToExecute())
+        throw Aform::GradeTooLowException();
+    executeForm();
 }
