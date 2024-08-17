@@ -22,14 +22,13 @@ class BitcoinExchange
 
 		void parseCvs();
 		void parseCvsLine(std::string line);
-		void parseSecondDb(std::string line);
+		void compareSecondDb(std::string line);
 		bool checkDateFormat(std::string date);
-		void parseSecondDbLine(std::string line);
+		void compareSecondDbLine(std::string line);
 
 		void printExchangeRates();
 		void printConversion(std::string currency, double amount);
 
-		void CompareDatabases();
 		double findClosestRate(std::string date, std::map<std::string, double> &db1);
 
 };

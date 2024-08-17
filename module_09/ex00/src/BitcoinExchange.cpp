@@ -49,7 +49,7 @@ void BitcoinExchange::parseCvsLine(std::string line)
 	_exchange_rates[date] = std::stod(rate);
 }
 
-void BitcoinExchange:: parseSecondDb(std::string filename)
+void BitcoinExchange:: compareSecondDb(std::string filename)
 {
 	std::ifstream file(filename);
 	if (!file.is_open())
@@ -59,14 +59,14 @@ void BitcoinExchange:: parseSecondDb(std::string filename)
 	}
 	std::string line;
 	while (std::getline(file, line))
-		parseSecondDbLine(line);
+		compareSecondDbLine(line);
 }
 
-void BitcoinExchange::parseSecondDbLine(std::string line)
+void BitcoinExchange::compareSecondDbLine(std::string line)
 {
-	//std::cout << line << std::endl;
-	std::string date, value;
-	if (line.find('|') == std::string::npos)
+	std::string date;
+	double value = 0;
+	if (line.find('|') == std::string::npos || line[0] == '|' || line[line.size() - 1] == '|')
 	{
 		std::cerr << "Error: invalid line format" << std::endl;
 		return ;
@@ -77,8 +77,22 @@ void BitcoinExchange::parseSecondDbLine(std::string line)
 		std::cerr << "Error: invalid date format. Please format like this: YYYY-MM-DD" << std::endl;
 		return ;
 	}
-	value = line.substr(line.find('|') + 1);
-	_second_db[date].push_back(std::stod(value));
+	try {
+		value = std::stod(line.substr(line.find('|') + 1));
+		if (value < 0 | value > 1000)
+		{
+			std::cerr << "Error: invalid value" << std::endl;
+			return ;
+		}
+	}
+	catch (std::exception &e)
+	{
+		std::cerr << "Error: invalid value format" << std::endl;
+		return ;
+	}
+	const double &exchangeRate = findClosestRate(date, _exchange_rates);
+	const float product = value * exchangeRate;
+	std::cout << date << " => " << value << " = " << product << std::endl;
 }
 
 bool BitcoinExchange::checkDateFormat(std::string date)
@@ -108,22 +122,5 @@ double BitcoinExchange::findClosestRate(std::string date, std::map<std::string, 
 	it--;
 	return it->second;
 }
-void BitcoinExchange::CompareDatabases()
-{
-	std::map<std::string, double> first_db = _exchange_rates;
-	std::map<std::string, std::vector<double> >  second_db = _second_db;
 
-
-
-	for (auto &it : second_db)
-	{
-		const std::string &date = it.first;
-		for (auto &value : it.second)
-		{
-			const double &exchangeRate = findClosestRate(date, first_db);
-			const float product = value * exchangeRate;
-			std::cout << date << " => " << value << " = " << product << std::endl;
-		}
-	}
-}
 

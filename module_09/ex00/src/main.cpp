@@ -9,6 +9,5 @@ int main(int argc, char **argv)
 		return 1;
 	}
 	bitcoinexchange.parseCvs();
-	bitcoinexchange.parseSecondDb(argv[1]);
-	bitcoinexchange.CompareDatabases();
+	bitcoinexchange.compareSecondDb(argv[1]);
 }
