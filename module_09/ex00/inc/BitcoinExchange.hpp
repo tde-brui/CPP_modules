@@ -9,7 +9,6 @@ class BitcoinExchange
 {
 	private:
 		std::map<std::string, double> _exchange_rates;
-		std::map<std::string, std::vector<double> > _second_db;
 		std::string _filename;
 
 
