@@ -11,7 +11,7 @@ void display_char(const std::string &input)
 
 void display_int(const std::string &input)
 {
-	int i = atoi(input.c_str());
+	int i = std::stoi(input);
 	if (static_cast<char>(i) < 32 || static_cast<char>(i) > 126)
 		std::cout << "char: Non displayable" << std::endl;
 	else
@@ -23,7 +23,7 @@ void display_int(const std::string &input)
 
 void display_float(const std::string &input)
 {
-	double f = atof(input.c_str());
+	double f = std::stof(input);
 	if (static_cast<char>(f) < 32 || static_cast<char>(f) > 126)
 		std::cout << "char: Non displayable" << std::endl;
 	else

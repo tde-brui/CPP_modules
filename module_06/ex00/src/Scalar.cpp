@@ -48,7 +48,7 @@ bool check_if_double(const std::string &input)
 	int dot = 0;
 	if (input[i] == '-' || input[i] == '+')
 		i++;
-	if (input[i] == '\0')
+	if (input[i] == '\0' || !isdigit(input[i]))
 		return false;
 	for(; input[i]; i++)
 	{
@@ -81,8 +81,12 @@ bool check_if_int(const std::string &input)
 
 literal_type getType(const std::string &input)
 {
-	if (input.length() == 1 && isalpha(input[0]))
-		return CHAR;
+	if (input.length() == 1)
+	{
+		char first = input[0];
+		if (first > 31 && first < 127)
+			return CHAR;
+	}
 	else if (check_if_float(input))
 		return FLOAT;
 	else if (check_if_int(input))
