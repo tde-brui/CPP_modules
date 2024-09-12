@@ -1,6 +1,6 @@
 #include <iostream>
 
-template <class T>
+template <typename T>
 class Array
 {
 	private:

@@ -1,6 +1,6 @@
 NAME = PmergeMe
 CC = c++
-CFLAGS = -Wall -Wextra -Werror -std=c++11
+CFLAGS = -Wall -Wextra -Werror -std=c++11 -g -fsanitize=address
 BUILD_DIR = build
 SRC_DIR = src
 INC_DIR = inc
