@@ -10,6 +10,6 @@ int main(int argc, char **argv)
 	PmergeMe pmergeme(argv);
 	pmergeme.parseVector();
 	pmergeme.sortVector();
-
-
+	pmergeme.createChains();
+	pmergeme.createInsertionSequence();
 }
