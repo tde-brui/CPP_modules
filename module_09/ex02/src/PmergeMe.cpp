@@ -76,7 +76,9 @@ void PmergeMe::sortVector()
 	}
 	//sort the pairs
 	sortVectorPairs();
-	//
+	//sort with Ford-Johnson merge
+	std::vector<int> temp;
+	
 	
 
 
