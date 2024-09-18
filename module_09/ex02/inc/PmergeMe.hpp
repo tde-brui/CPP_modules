@@ -9,9 +9,11 @@ class PmergeMe
 	private:
 		std::string 	_intList;
 		std::vector<int>	vec1;
-		std::vector<std::pair<int, int> > vecPair;
 		std::vector<int> mainVec;
 		std::vector<int> pendVec;
+		std::vector<int> insertionOrder;
+		std::vector<std::pair<int, int> > vecPair;
+		bool stragglerFlag;
 
 
 		int straggler;
@@ -32,8 +34,8 @@ class PmergeMe
 		void createChains();
 		void printVector();
 		std::vector<int> createJacobsthalSequence(int n);
-		std::vector<int> createInsertionSequence();
-		// void jacobsthalInsertion();
+		void createInsertionSequence();
+		void vecInsert();
 
 
 
