@@ -144,49 +144,47 @@ void PmergeMe::createChains()
 		mainVec.push_back(vecPair[i].first);
 		pendVec.push_back(vecPair[i].second);
 	}
-	std::cout << "pendVec: ";
-	for (auto it = pendVec.begin(); it != pendVec.end(); it++)
-		std::cout << *it << " ";
-	std::cout << std::endl;
-	std::cout << "mainVec: ";
-	for (auto it = mainVec.begin(); it != mainVec.end(); it++)
-		std::cout << *it << " ";
-	std::cout << std::endl;
 }
 
-std::vector<int> PmergeMe::createJacobsthalSequence(int maxIndex)
+void PmergeMe::generateJacobsthalGroupSize()
 {
-	std::vector<int> jacobsthal = {0, 1, 3};
-	int i = 0;
-	while (i < maxIndex)
+	jacobsthalGroupSize.push_back(2);
+	jacobsthalGroupSize.push_back(2);
+
+	int groupTotal = 4;
+	int groupSize = 0;
+	while (groupTotal < 2000000)
 	{
-		int nextJacobsthal = jacobsthal.back() + 2 * jacobsthal[jacobsthal.size() - 2];
-		jacobsthal.push_back(nextJacobsthal);
-		i++;
+		groupSize = jacobsthalGroupSize.back() + 2 * jacobsthalGroupSize[jacobsthalGroupSize.size() - 2];
+		jacobsthalGroupSize.push_back(groupSize);
+		groupTotal += groupSize;
 	}
-	return jacobsthal;
 }
+
 
 void 	PmergeMe::createInsertionSequence()
 {
-	unsigned int pendSize = pendVec.size();
-	std::vector<int> jacobsthalSequence = createJacobsthalSequence(pendSize);
-	unsigned int k = 0;
-	for (unsigned int i = 2; i < jacobsthalSequence.size(); i++)
+	generateJacobsthalGroupSize();
+	int groupTotal = 0;
+	int groupIndex = 0;
+	int pendSize = pendVec.size();
+	while (groupTotal < pendSize)
 	{
-		int currJacobsthal = jacobsthalSequence[i];
-		for (int j = currJacobsthal; j > jacobsthalSequence[i - 1]; j--)
+		unsigned int prevJacobsthal = groupTotal;
+		groupTotal += jacobsthalGroupSize[groupIndex++];
+		if (groupTotal <= pendSize)
 		{
-			if (k >= pendSize)
-				break;
-			insertionOrder.push_back(j);
-			k++;
+			for (unsigned int i = groupTotal; i > prevJacobsthal; i--)
+				insertionOrder.push_back(i);
+		}
+		else
+		{
+			int diff = groupTotal - pendSize;
+			for (unsigned int i = groupTotal - diff; i > prevJacobsthal; i--)
+				insertionOrder.push_back(i);
 		}
 	}
-	std::cout << "Insertion sequence: ";
-	for (auto it = insertionOrder.begin(); it != insertionOrder.end(); it++)
-		std::cout << *it << " ";
-	std::cout << std::endl;
+
 }
 
 void PmergeMe::printVector()

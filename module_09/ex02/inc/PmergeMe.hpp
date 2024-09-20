@@ -14,6 +14,7 @@ class PmergeMe
 		std::vector<int> insertionOrder;
 		std::vector<std::pair<int, int> > vecPair;
 		bool stragglerFlag;
+		std::vector<unsigned int> jacobsthalGroupSize;
 
 
 		int straggler;
@@ -34,6 +35,7 @@ class PmergeMe
 		void createChains();
 		void printVector();
 		std::vector<int> createJacobsthalSequence(int n);
+		void generateJacobsthalGroupSize();
 		void createInsertionSequence();
 		void vecInsert();
 
