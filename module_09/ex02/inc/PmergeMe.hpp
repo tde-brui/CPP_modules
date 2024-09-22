@@ -1,44 +1,78 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <deque>
 #include <algorithm>
 #include <sstream>
 
 class PmergeMe
 {
-	private:
-		std::string 	_intList;
-		std::vector<int>	vec1;
-		std::vector<int> mainVec;
-		std::vector<int> pendVec;
-		std::vector<int> insertionOrder;
-		std::vector<std::pair<int, int> > vecPair;
-		bool stragglerFlag;
-		std::vector<unsigned int> jacobsthalGroupSize;
-
-
-		int straggler;
-
 	public:
-		PmergeMe();
-		PmergeMe(char **argv);
-		~PmergeMe();
-		PmergeMe(const PmergeMe &pmergeme);
-		PmergeMe &operator=(const PmergeMe &pmergeme);
+		class Vector
+		{
+			private:
+				std::string 	_intList;
+				std::vector<int>	vec1;
+				std::vector<int> mainVec;
+				std::vector<int> pendVec;
+				std::vector<int> insertionOrder;
+				std::vector<std::pair<int, int> > vecPair;
+				bool stragglerFlag;
+				std::vector<unsigned int> jacobsthalGroupSize;
+				int straggler;
 
-		//Vector functions
-		std::string appendArgs(char **argv);
-		void parseVector();
-		void sortVector();
-		void sortVectorPairs(int left, int right);
-		void mergeVector(int left, int mid, int right);
-		void createChains();
-		void printVector();
-		std::vector<int> createJacobsthalSequence(int n);
-		void generateJacobsthalGroupSize();
-		void createInsertionSequence();
-		void vecInsert();
+			public:
+				Vector(char **argv);
+				Vector(const Vector &vector);
+				Vector &operator=(const Vector &vector);
+				~Vector();
+				std::string appendArgs(char **argv);
+				std::string getIntList() const;
+				void parseVector();
+				void sortVector();
+				void sortVectorPairs(int left, int right);
+				void mergeVector(int left, int mid, int right);
+				void createChains();
+				void printVector();
+				std::vector<int> createJacobsthalSequence(int n);
+				void generateJacobsthalGroupSize();
+				void createInsertionSequence();
+				void vecInsert();
+				
+		};
 
+		class Deque
+		{
+			private:
+				std::string 	_intList;
+				std::deque<int> deque1;
+				std::deque<int> mainDeque;
+				std::deque<int> pendDeque;
+				std::deque<int> insertionOrder;
+				std::deque<std::pair<int, int> > dequePair;
+				std::deque<int> jacobsthalGroupSize;
+				bool stragglerFlag;
+				int straggler;
+
+			public:
+				Deque(char **argv);
+				Deque(const Deque &deque);
+				Deque &operator=(const Deque &deque);
+				~Deque();
+				std::string appendedArgs(char **argv);
+				std::string getIntList() const;
+				void parseDeque();
+				void sortDeque();
+				void sortDequePairs(int left, int right);
+				void mergeDeque(int left, int mid, int right);
+				void createChains();
+				void createInsertionSequence();
+				void dequeInsert();
+				void generateJacobsthalGroups();
+				void printDeque(std::deque<int> &deque);
+
+
+		};
 
 
 };
