@@ -11,6 +11,8 @@ int main()
 		}
 		std::cout << sp.shortestSpan() << std::endl;
 		std::cout << sp.longestSpan() << std::endl;
+		Span sp2;
+		sp2.addNumber(1);
 	}
 	catch (std::length_error &e)
 	{
