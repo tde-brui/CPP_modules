@@ -14,7 +14,7 @@ PmergeMe::Vector::Vector(const Vector &vector)
 	vecPair = vector.vecPair;
 	stragglerFlag = vector.stragglerFlag;
 	straggler = vector.straggler;
-	jacobsthalGroupSize = vector.jacobsthalGroupSize;
+	jacobsthalsSize = vector.jacobsthalsSize;
 }
 
 PmergeMe::Vector &PmergeMe::Vector::operator=(const Vector &vector)
@@ -27,7 +27,7 @@ PmergeMe::Vector &PmergeMe::Vector::operator=(const Vector &vector)
 	vecPair = vector.vecPair;
 	stragglerFlag = vector.stragglerFlag;
 	straggler = vector.straggler;
-	jacobsthalGroupSize = vector.jacobsthalGroupSize;
+	jacobsthalsSize = vector.jacobsthalsSize;
 	return *this;
 }
 
@@ -121,22 +121,23 @@ void PmergeMe::Vector::sortVectorPairs(int left, int right)
 
 void PmergeMe::Vector::mergeVector(int left, int mid, int right)
 {
-
-	int sizeLeft = mid - left + 1;
-	int sizeRight = right - mid;
+	unsigned int sizeLeft = mid - left + 1;
+	unsigned int sizeRight = right - mid;
 
 	std::vector<std::pair<int, int> > leftVec, rightVec;
-	//only want to sort the biggest of each pair;
-	//bigger of the two is always the first element, and always an even index
 
-	for (int i = 0; i < sizeLeft; i++)
+	for (unsigned int i = 0; i < sizeLeft; i++)
+	{
 		leftVec.push_back(vecPair[left + i]);
-	for (int i = 0; i < sizeRight; i++)
+	}
+	for (unsigned int i = 0; i < sizeRight; i++)
+	{
 		rightVec.push_back(vecPair[mid + 1 + i]);
-	
-	int i = 0;
-	int j = 0;
-	int k = left;
+	}
+
+	unsigned int i = 0;
+	unsigned int j = 0;
+	unsigned int k = left;
 
 	while (i < sizeLeft && j < sizeRight)
 	{
@@ -152,6 +153,7 @@ void PmergeMe::Vector::mergeVector(int left, int mid, int right)
 		}
 		k++;
 	}
+
 	while (i < sizeLeft)
 	{
 		vecPair[k] = leftVec[i];
@@ -164,6 +166,7 @@ void PmergeMe::Vector::mergeVector(int left, int mid, int right)
 		j++;
 		k++;
 	}
+
 }
 
 void PmergeMe::Vector::createChains()
@@ -179,32 +182,32 @@ void PmergeMe::Vector::createChains()
 		pendVec.push_back(straggler);
 }
 
-void PmergeMe::Vector::generateJacobsthalGroupSize()
+void PmergeMe::Vector::generateJacobsthalNumbers()
 {
-	jacobsthalGroupSize.push_back(2);
-	jacobsthalGroupSize.push_back(2);
+	jacobsthalsSize.push_back(2);
+	jacobsthalsSize.push_back(2);
 
 	int groupSize = 0;
 	size_t pendSize = pendVec.size();
 
-	while (jacobsthalGroupSize.size() < pendSize)
+	while (jacobsthalsSize.size() < pendSize)
 	{
-		groupSize = jacobsthalGroupSize.back() + 2 * jacobsthalGroupSize[jacobsthalGroupSize.size() - 2];
-		jacobsthalGroupSize.push_back(groupSize);
+		groupSize = jacobsthalsSize.back() + 2 * jacobsthalsSize[jacobsthalsSize.size() - 2];
+		jacobsthalsSize.push_back(groupSize);
 	}
 }
 
 
 void 	PmergeMe::Vector::createInsertionSequence()
 {
-	generateJacobsthalGroupSize();
+	generateJacobsthalNumbers();
 	int groupTotal = 0;
 	int groupIndex = 0;
 	int pendSize = pendVec.size();
 	while (groupTotal < pendSize)
 	{
 		unsigned int prevJacobsthal = groupTotal;
-		groupTotal += jacobsthalGroupSize[groupIndex++];
+		groupTotal += jacobsthalsSize[groupIndex++];
 		if (groupTotal <= pendSize)
 		{
 			for (unsigned int i = groupTotal; i > prevJacobsthal; i--)
@@ -217,23 +220,18 @@ void 	PmergeMe::Vector::createInsertionSequence()
 				insertionOrder.push_back(i);
 		}
 	}
-
 }
 
 void PmergeMe::Vector::vecInsert()
 {
 	createChains();
 	createInsertionSequence();
-	int itemsInserted = 1;
-	int val = 0;
-	int endPos = 0;
-	for (size_t i = 0; i < pendVec.size(); i++)
+
+	for (unsigned int i = 0; i < pendVec.size(); i++)
 	{
-		val = pendVec[insertionOrder[i] - 1];
-		endPos = insertionOrder[i] + itemsInserted;
-		std::vector<int>::iterator it = std::upper_bound(mainVec.begin(), mainVec.begin() + endPos, val);
-		mainVec.insert(it, val);
-		itemsInserted++;
+		int val = pendVec[insertionOrder[i] - 1];
+		auto pos = std::lower_bound(mainVec.begin(), mainVec.end(), val);
+		mainVec.insert(pos, val);
 	}
 }
 
