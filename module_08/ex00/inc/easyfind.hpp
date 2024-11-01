@@ -5,10 +5,10 @@
 #include <stack>
 
 template <typename T>
-int easyfind(T &t, int target)
+bool easyfind(T &t, int target)
 {
 	auto it = std::find(t.begin(), t.end(), target);
 	if (it == t.end())
-		throw std::exception();
-	return std::distance(t.begin(), it);
+		throw std::out_of_range("Element not found");
+	return true;
 }

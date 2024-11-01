@@ -33,7 +33,7 @@ void Span::addNumber(int num)
 unsigned int Span::shortestSpan()
 {
 	if (vec1.size() < 2)
-		throw (std::length_error("List is too short"));
+		throw (std::length_error("List is too short to check shortestSpan"));
 	int minspan = *std::max_element(vec1.begin(), vec1.end());
 	int span = 0;
 
@@ -50,7 +50,7 @@ unsigned int Span::shortestSpan()
 unsigned int Span::longestSpan()
 {
 	if (vec1.size() < 2)
-		throw(std::length_error("List is too short"));
+		throw(std::length_error("List is too short to check longestSpan"));
 	auto min_iter = std::min_element(vec1.begin(), vec1.end());
 	auto max_iter = std::max_element(vec1.begin(), vec1.end());
 	return (*max_iter - *min_iter);
