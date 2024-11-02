@@ -53,7 +53,7 @@ void RPN::compressStack(char operatorChar)
 			std::cerr << "invalid operator" << std::endl;
 			exit(1);
 	}
-	std::cout << "Result: " << result << std::endl;
+	//std::cout << "Result: " << result << std::endl;
 	_stack.push(result);
 }
 
