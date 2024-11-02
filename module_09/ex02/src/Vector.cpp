@@ -14,7 +14,7 @@ PmergeMe::Vector::Vector(const Vector &vector)
 	vecPair = vector.vecPair;
 	stragglerFlag = vector.stragglerFlag;
 	straggler = vector.straggler;
-	jacobsthalsSize = vector.jacobsthalsSize;
+	jacobsthals = vector.jacobsthals;
 }
 
 PmergeMe::Vector &PmergeMe::Vector::operator=(const Vector &vector)
@@ -27,7 +27,7 @@ PmergeMe::Vector &PmergeMe::Vector::operator=(const Vector &vector)
 	vecPair = vector.vecPair;
 	stragglerFlag = vector.stragglerFlag;
 	straggler = vector.straggler;
-	jacobsthalsSize = vector.jacobsthalsSize;
+	jacobsthals = vector.jacobsthals;
 	return *this;
 }
 
@@ -88,10 +88,43 @@ void PmergeMe::Vector::parseVector()
 		vec1.push_back(value);
 	}
 }
+
+bool PmergeMe::Vector::isSortedRange(int left, int right)
+{
+	for (int i = left; i < right; i++)
+	{
+		if (!(vecPair[i].first < vecPair[i].second && vecPair[i].second <
+		vecPair[i + 1].first && vecPair[i + 1].first < vecPair[i + 1].second))
+		{
+			return false;
+		}
+	}
+	return true;
+}
+
+bool PmergeMe::Vector::isSorted()
+{
+	for (unsigned int i = 0; i < vec1.size() - 1; i++)
+	{
+		if (vec1[i] > vec1[i + 1])
+			return false;
+	}
+	return true;
+}
+
+const char *PmergeMe::Vector::SortedException::what() const noexcept
+{
+	return "List already sorted!";
+}
+
 void PmergeMe::Vector::sortVector()
 {
 	if (vec1.size() < 2)
 		return ;
+	if (isSorted())
+	{
+		throw SortedException();
+	}
 	if (vec1.size() % 2 == 1)
 	{
 		straggler = vec1.back();
@@ -123,50 +156,34 @@ void PmergeMe::Vector::mergeVector(int left, int mid, int right)
 {
 	unsigned int sizeLeft = mid - left + 1;
 	unsigned int sizeRight = right - mid;
+	unsigned int k = left;
+
+	if (isSortedRange(left, right))
+		return ;
 
 	std::vector<std::pair<int, int> > leftVec, rightVec;
 
 	for (unsigned int i = 0; i < sizeLeft; i++)
-	{
 		leftVec.push_back(vecPair[left + i]);
-	}
 	for (unsigned int i = 0; i < sizeRight; i++)
-	{
 		rightVec.push_back(vecPair[mid + 1 + i]);
-	}
 
 	unsigned int i = 0;
 	unsigned int j = 0;
-	unsigned int k = left;
 
 	while (i < sizeLeft && j < sizeRight)
 	{
 		if (leftVec[i].first <= rightVec[j].first)
-		{
-			vecPair[k] = leftVec[i];
-			i++;
-		}
+			vecPair[k] = leftVec[i++];
 		else
-		{
-			vecPair[k] = rightVec[j];
-			j++;
-		}
+			vecPair[k] = rightVec[j++];
 		k++;
 	}
 
 	while (i < sizeLeft)
-	{
-		vecPair[k] = leftVec[i];
-		i++;
-		k++;
-	}
+		vecPair[k++] = leftVec[i++];
 	while (j < sizeRight)
-	{
-		vecPair[k] = rightVec[j];
-		j++;
-		k++;
-	}
-
+		vecPair[k++] = rightVec[j++];
 }
 
 void PmergeMe::Vector::createChains()
@@ -184,16 +201,16 @@ void PmergeMe::Vector::createChains()
 
 void PmergeMe::Vector::generateJacobsthalNumbers()
 {
-	jacobsthalsSize.push_back(2);
-	jacobsthalsSize.push_back(2);
+	jacobsthals.push_back(2);
+	jacobsthals.push_back(2);
 
 	int groupSize = 0;
 	size_t pendSize = pendVec.size();
 
-	while (jacobsthalsSize.size() < pendSize)
+	while (jacobsthals.size() < pendSize)
 	{
-		groupSize = jacobsthalsSize.back() + 2 * jacobsthalsSize[jacobsthalsSize.size() - 2];
-		jacobsthalsSize.push_back(groupSize);
+		groupSize = jacobsthals.back() + 2 * jacobsthals[jacobsthals.size() - 2];
+		jacobsthals.push_back(groupSize);
 	}
 }
 
@@ -207,7 +224,7 @@ void 	PmergeMe::Vector::createInsertionSequence()
 	while (groupTotal < pendSize)
 	{
 		unsigned int prevJacobsthal = groupTotal;
-		groupTotal += jacobsthalsSize[groupIndex++];
+		groupTotal += jacobsthals[groupIndex++];
 		if (groupTotal <= pendSize)
 		{
 			for (unsigned int i = groupTotal; i > prevJacobsthal; i--)

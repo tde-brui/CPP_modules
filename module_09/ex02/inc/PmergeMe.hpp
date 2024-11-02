@@ -18,7 +18,7 @@ class PmergeMe
 				std::vector<int> insertionOrder;
 				std::vector<std::pair<int, int> > vecPair;
 				bool stragglerFlag;
-				std::vector<unsigned int> jacobsthalsSize;
+				std::vector<unsigned int> jacobsthals;
 				int straggler;
 
 			public:
@@ -38,6 +38,14 @@ class PmergeMe
 				void generateJacobsthalNumbers();
 				void createInsertionSequence();
 				void vecInsert();
+				bool isSortedRange(int left, int right);
+				bool isSorted();
+			
+			class SortedException : public std::exception
+			{
+				public:
+					const char *what() const noexcept;
+			};
 				
 		};
 
@@ -50,7 +58,7 @@ class PmergeMe
 				std::deque<int> pendDeque;
 				std::deque<int> insertionOrder;
 				std::deque<std::pair<int, int> > dequePair;
-				std::deque<int> jacobsthalGroupSize;
+				std::deque<int> jacobsthals;
 				bool stragglerFlag;
 				int straggler;
 
@@ -70,8 +78,8 @@ class PmergeMe
 				void dequeInsert();
 				void generateJacobsthalGroups();
 				void printDeque(std::deque<int> &deque);
-
-
+				bool isSortedRange(int left, int right);
+				bool isSorted();
 		};
 
 

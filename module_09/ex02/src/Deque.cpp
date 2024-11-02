@@ -22,7 +22,7 @@ PmergeMe::Deque::Deque(const Deque &deque)
 	dequePair = deque.dequePair;
 	stragglerFlag = deque.stragglerFlag;
 	straggler = deque.straggler;
-	jacobsthalGroupSize = deque.jacobsthalGroupSize;
+	jacobsthals = deque.jacobsthals;
 }
 
 PmergeMe::Deque &PmergeMe::Deque::operator=(const Deque &deque)
@@ -35,7 +35,7 @@ PmergeMe::Deque &PmergeMe::Deque::operator=(const Deque &deque)
 	dequePair = deque.dequePair;
 	stragglerFlag = deque.stragglerFlag;
 	straggler = deque.straggler;
-	jacobsthalGroupSize = deque.jacobsthalGroupSize;
+	jacobsthals = deque.jacobsthals;
 	return *this;
 }
 
@@ -83,6 +83,29 @@ void PmergeMe::Deque::parseDeque()
 	}
 }
 
+bool PmergeMe::Deque::isSortedRange(int left, int right)
+{
+	for (int i = left; i < right; i++)
+	{
+		if (!(dequePair[i].first < dequePair[i].second && dequePair[i].second <
+		dequePair[i + 1].first && dequePair[i + 1].first < dequePair[i + 1].second))
+		{
+			return false;
+		}
+	}
+	return true;
+}
+
+bool PmergeMe::Deque::isSorted()
+{
+	for (unsigned int i = 0; i < deque1.size() - 1; i++)
+	{
+		if (deque1[i] > deque1[i + 1])
+			return false;
+	}
+	return true;
+}
+
 void PmergeMe::Deque::sortDequePairs(int left, int right)
 {
 	if (left >= right)
@@ -97,8 +120,13 @@ void PmergeMe::Deque::mergeDeque(int left, int mid, int right)
 {
 	int sizeLeft = mid - left + 1;
 	int sizeRight = right - mid;
+	int k = left;
+
+	if (isSortedRange(left, right))
+		return;
 
 	std::deque<std::pair<int, int> > leftDeque, rightDeque;
+
 	for (int i = 0; i < sizeLeft; i++)
 		leftDeque.push_back(dequePair[left + i]);
 	for (int i = 0; i < sizeRight; i++)
@@ -106,35 +134,20 @@ void PmergeMe::Deque::mergeDeque(int left, int mid, int right)
 	
 	int i = 0;
 	int j = 0;
-	int k = left;
 
 	while (i < sizeLeft && j < sizeRight)
 	{
 		if (leftDeque[i].first <= rightDeque[j].first)
-		{
-			dequePair[k] = leftDeque[i];
-			i++;
-		}
+			dequePair[k] = leftDeque[i++];
 		else
-		{
-			dequePair[k] = rightDeque[j];
-			j++;
-		}
+			dequePair[k] = rightDeque[j++];
 		k++;
 	}
 
 	while (i < sizeLeft)
-	{
-		dequePair[k] = leftDeque[i];
-		i++;
-		k++;
-	}
+		dequePair[k++] = leftDeque[i++];
 	while (j < sizeRight)
-	{
-		dequePair[k] = rightDeque[j];
-		j++;
-		k++;
-	}
+		dequePair[k++] = rightDeque[j++];
 }
 
 void PmergeMe::Deque::createChains()
@@ -152,16 +165,16 @@ void PmergeMe::Deque::createChains()
 
 void PmergeMe::Deque::generateJacobsthalGroups()
 {
-	jacobsthalGroupSize.push_back(2);
-	jacobsthalGroupSize.push_back(2);
+	jacobsthals.push_back(2);
+	jacobsthals.push_back(2);
 	
 	int groupSize = 0;
 	size_t pendSize = pendDeque.size();
 
-	while (jacobsthalGroupSize.size() < pendSize)
+	while (jacobsthals.size() < pendSize)
 	{
-		groupSize = jacobsthalGroupSize.back() + 2 * jacobsthalGroupSize[jacobsthalGroupSize.size() - 2];
-		jacobsthalGroupSize.push_back(groupSize);
+		groupSize = jacobsthals.back() + 2 * jacobsthals[jacobsthals.size() - 2];
+		jacobsthals.push_back(groupSize);
 	}
 }
 
@@ -174,7 +187,7 @@ void PmergeMe::Deque::createInsertionSequence()
 	while (groupTotal < pendSize)
 	{
 		unsigned int prevJacobsthal = groupTotal;
-		groupTotal += jacobsthalGroupSize[groupIndex];
+		groupTotal += jacobsthals[groupIndex];
 		if (groupTotal <= pendSize)
 		{
 			for (unsigned int i = groupTotal; i > prevJacobsthal; i--)
@@ -194,16 +207,12 @@ void PmergeMe::Deque::dequeInsert()
 {
 	createChains();
 	createInsertionSequence();
-	int itemsInserted = 1;
-	int val = 0;
-	int endPos = 0;
+
 	for (unsigned int i = 0; i < pendDeque.size(); i++)
 	{
-		val = pendDeque[insertionOrder[i] - 1];
-		endPos = insertionOrder[i] + itemsInserted;
-		std::deque<int>::iterator it = std::upper_bound(mainDeque.begin(), mainDeque.begin() + endPos, val);
-		mainDeque.insert(it, val);
-		itemsInserted++;
+		int val = pendDeque[insertionOrder[i] - 1];
+		auto pos = std::lower_bound(mainDeque.begin(), mainDeque.end(), val);
+		mainDeque.insert(pos, val);
 	}
 }
 
