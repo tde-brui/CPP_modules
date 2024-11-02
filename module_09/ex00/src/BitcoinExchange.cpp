@@ -115,10 +115,7 @@ double BitcoinExchange::findClosestRate(std::string date, std::map<std::string, 
 {
 	std::map<std::string, double>::iterator it = db1.upper_bound(date);
 	if (it == db1.begin())
-	{
-		std::cerr << "Error: no date lower than " << date << " found in database" <<  std::endl;
-		exit(1);
-	}
+		return 0;
 	it--;
 	return it->second;
 }
