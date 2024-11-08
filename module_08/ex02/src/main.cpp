@@ -23,6 +23,10 @@ int main()
     std::cout << std::endl;
 
     std::cout << "Looping through stack..." << std::endl;
+    MutantStack<int>::iterator mstack_begin = mstack.begin();
+    MutantStack<int>::iterator mstack_end = mstack.end();
+    std::cout << "stack begin: " <<  *mstack_begin << std::endl;
+    std::cout << "stack end: " << *mstack_end << std::endl;
     for (auto &elem : mstack)
     {
         std::cout << elem << std::endl;

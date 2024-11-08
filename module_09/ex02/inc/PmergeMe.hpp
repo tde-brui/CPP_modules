@@ -76,7 +76,7 @@ class PmergeMe
 				void createChains();
 				void createInsertionSequence();
 				void dequeInsert();
-				void generateJacobsthalGroups();
+				void generateJacobsthalNumbers();
 				void printDeque(std::deque<int> &deque);
 				bool isSortedRange(int left, int right);
 				bool isSorted();

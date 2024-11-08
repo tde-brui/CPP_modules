@@ -163,7 +163,7 @@ void PmergeMe::Deque::createChains()
 		pendDeque.push_back(straggler);
 }
 
-void PmergeMe::Deque::generateJacobsthalGroups()
+void PmergeMe::Deque::generateJacobsthalNumbers()
 {
 	jacobsthals.push_back(2);
 	jacobsthals.push_back(2);
@@ -180,7 +180,7 @@ void PmergeMe::Deque::generateJacobsthalGroups()
 
 void PmergeMe::Deque::createInsertionSequence()
 {
-	generateJacobsthalGroups();
+	generateJacobsthalNumbers();
 	int groupTotal = 0;
 	int groupIndex = 0;
 	int pendSize = pendDeque.size();

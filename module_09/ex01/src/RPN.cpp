@@ -42,18 +42,17 @@ void RPN::compressStack(char operatorChar)
 			result = top1 * top2;
 			break ;
 		case '/':
-			if (top2 == 0)
+			if (top1 == 0)
 			{
 				std::cerr << "Error: attempting division by 0" << std::endl;
 				exit(1);
 			}
-			result = top1 / top2;
+			result = top2 / top1;
 			break ;
 		default: 
 			std::cerr << "invalid operator" << std::endl;
 			exit(1);
 	}
-	//std::cout << "Result: " << result << std::endl;
 	_stack.push(result);
 }
 
